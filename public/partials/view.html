@@ -1,0 +1,34 @@
+
+
+    <div ng-controller="UserCtrl as uc">
+    <div>
+            <div class="form-group">
+                <h3>
+                    Ricette
+                    <a ng-href="/#/recipes/create" class="btn btn-primary pull-right" id="btn_user_create">Aggiungi Ricetta</a>
+                </h3>
+                <hr>
+            </div>
+            <div class="form-group">
+                <input class="form-control" type="text" ng-model="searchText" placeholder="Type here to filter Users...">
+                <hr>
+            </div>
+			
+
+			<div ng-repeat="usr in uc.users | filter:searchText">
+				{{ usr.name}}
+				<button ng-click="uc.showRicetta(usr)">Mostra ricetta</button>
+				<button ng-click="uc.deleteRicetta(usr)">Cancella ricetta</button>
+				<div ng-show="usr.show">
+					<button ng-click="uc.hideRicetta(usr)">Nascondi ricetta</button>
+					<div><a href="#" editable-text="usr.category">{{ usr.category || "empty" }}</a></div>
+					<div><a href="#" editable-text="usr.ingredients">{{ usr.ingredients || "empty" }}</a></div>
+					<div><a href="#" editable-textarea="usr.procedure" e-rows="7" e-cols="40">{{ usr.procedure || "empty" }}</a></div>
+					<div><button ng-click="uc.updateRicetta(usr)">Salva</button></div>
+				</div>
+
+			</div>
+                  
+        </div>
+
+    </div>
