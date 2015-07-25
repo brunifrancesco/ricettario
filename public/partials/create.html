@@ -1,8 +1,8 @@
-<div ng-controller="CreateUserCtrl as cuc">
+<div ng-controller="CreateRicettaCtrl as crc">
     <h1>Crea ricetta</h1>
 
     <form id="CreateUserForm" name="CreateUserForm" class="form-horizontal" role="form"
-          ng-submit="cuc.createUser()">
+          ng-submit="crc.createRicetta()">
         <legend class="sm-col-12">Aggiungi informazioni</legend>
 
         <div class="form-group">
@@ -10,7 +10,7 @@
 
             <div class="col-sm-8">
                 <input type="text" class="form-control" name="name" id="name" placeholder=""
-                       ng-model="cuc.user.name">
+                       ng-model="crc.ricetta.name">
             </div>
         </div>
         
@@ -18,7 +18,7 @@
             <label id="lbl_firstName" for="firstName" class="col-sm-4 control-label">Categoria</label>
 
             <div class="col-sm-8">
-                <select ng-model="cuc.user.category">
+                <select ng-model="crc.ricetta.category">
  					<option value="antipasti">Antipasti</option>
 					<option value="primi">Primi</option>
 					<option value="secondi">Secondi</option>
@@ -33,7 +33,7 @@
 
             <div class="col-sm-8">
                 <input type="text" class="form-control" name="ingredients" id="ingredients" placeholder=""
-                       ng-model="cuc.user.ingredients">
+                       ng-model="crc.ricetta.ingredients">
             </div>
         </div>
 
@@ -42,11 +42,13 @@
 
             <div class="col-sm-8">
                 <input type="text" class="form-control" name="procedure" id="procedure" placeholder=""
-                       ng-model="cuc.user.procedure">
+                       ng-model="crc.ricetta.procedure">
             </div>
         </div>
+        
+        
 
-        <pre>{{ cuc.user | json }}</pre>
+        
 
         <div class="form-group">
             <div class="col-sm-offset-4 col-sm-8 text-right">

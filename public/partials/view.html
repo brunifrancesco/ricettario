@@ -1,6 +1,6 @@
 
 
-    <div ng-controller="UserCtrl as uc">
+    <div ng-controller="RicettaCtrl as rc">
     <div>
             <div class="form-group">
                 <h3>
@@ -15,16 +15,16 @@
             </div>
 			
 
-			<div ng-repeat="usr in uc.users | filter:searchText">
-				{{ usr.name}}
-				<button ng-click="uc.showRicetta(usr)">Mostra ricetta</button>
-				<button ng-click="uc.deleteRicetta(usr)">Cancella ricetta</button>
-				<div ng-show="usr.show">
-					<button ng-click="uc.hideRicetta(usr)">Nascondi ricetta</button>
-					<div><a href="#" editable-text="usr.category">{{ usr.category || "empty" }}</a></div>
-					<div><a href="#" editable-text="usr.ingredients">{{ usr.ingredients || "empty" }}</a></div>
-					<div><a href="#" editable-textarea="usr.procedure" e-rows="7" e-cols="40">{{ usr.procedure || "empty" }}</a></div>
-					<div><button ng-click="uc.updateRicetta(usr)">Salva</button></div>
+			<div ng-repeat="ricetta in rc.ricettas | filter:searchText">
+				{{ ricetta.name}}
+				<button ng-click="rc.showRicetta(ricetta)">Mostra ricetta</button>
+				<button ng-click="rc.deleteRicetta(ricetta)">Cancella ricetta</button>
+				<div ng-show="ricetta.show">
+					<button ng-click="rc.hideRicetta(ricetta)">Nascondi ricetta</button>
+					<div><a href="#" editable-text="ricetta.category">{{ ricetta.category || "empty" }}</a></div>
+					<div><a href="#" editable-text="ricetta.ingredients">{{ ricetta.ingredients || "empty" }}</a></div>
+					<div><a href="#" editable-textarea="ricetta.procedure" e-rows="7" e-cols="40">{{ ricetta.procedure || "empty" }}</a></div>
+					<div><button ng-click="rc.updateRicetta(ricetta)">Salva</button></div>
 				</div>
 
 			</div>

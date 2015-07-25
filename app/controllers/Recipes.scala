@@ -34,10 +34,6 @@ class Recipes extends Controller with MongoController {
    */
   def collection: JSONCollection = db.collection[JSONCollection]("recipes")
 
-  // ------------------------------------------ //
-  // Using case classes + Json Writes and Reads //
-  // ------------------------------------------ //
-
 
   def createRecipe = Action.async(parse.json) {
     request =>
@@ -50,13 +46,12 @@ class Recipes extends Controller with MongoController {
      */
       request.body.validate[Recipe].map {
         recipe =>
-        // `user` is an instance of the case class `models.User`
           collection.insert(recipe).map {
             lastError =>
               logger.debug(s"Successfully inserted with LastError: $lastError")
               Created(s"Recipe Created")
           }
-      }.getOrElse(Future.successful(BadRequest("invalid json")))
+      }.getOrElse(Future.successful(BadRequest(Json.obj("result" -> "Created"))))
   }
 
 
@@ -64,21 +59,21 @@ class Recipes extends Controller with MongoController {
     request =>
       request.body.validate[Recipe].map {
         recipe =>
-          // find our user by first name and last name
+          // find recipe by name
           val nameSelector = Json.obj("name" -> recipe.name)
           collection.update(nameSelector, recipe).map {
             lastError =>
               logger.debug(s"Successfully updated with LastError: $lastError")
-              Created(s"User Updated")
+              Created(Json.obj("result" -> "Created"))
           }
-      }.getOrElse(Future.successful(BadRequest("invalid json")))
+      }.getOrElse(Future.successful(BadRequest("Invalid json")))
   }
   
   def deleteRicetta(name: String) = Action.async {
     val nameSelector = Json.obj("name" -> name)
     collection.remove(nameSelector).map{
       lastError =>
-         Ok("Deleted")
+         Ok(Json.obj("result" -> "Deleted"))
     }
   }
 
@@ -92,16 +87,16 @@ class Recipes extends Controller with MongoController {
       .cursor[Recipe]
 
     // gather all the JsObjects in a list
-    val futureUsersList: Future[List[Recipe]] = cursor.collect[List]()
+    val futureRecipesList: Future[List[Recipe]] = cursor.collect[List]()
 
     // transform the list into a JsArray
-    val futurePersonsJsonArray: Future[JsArray] = futureUsersList.map { recipes =>
+    val futureRecipesJsonArray: Future[JsArray] = futureRecipesList.map { recipes =>
       Json.arr(recipes)
     }
     // everything's ok! Let's reply with the array
-    futurePersonsJsonArray.map {
-      users =>
-        Ok(users(0))
+    futureRecipesJsonArray.map {
+      recipes =>
+        Ok(recipes(0))
     }
   }
 
