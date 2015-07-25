@@ -24,7 +24,7 @@ fronted with Twitter bootstrap CSS framework, because well, im not a web designe
 * **PlayReactiveMongo** gives interaction with MongoDB providing a non-blocking driver as well as some useful additions for handling JSON.
   * Check out their GitHub: [Play-ReactiveMongo](https://github.com/ReactiveMongo/Play-ReactiveMongo)
 
-
+[Here](http://www.typesafe.com/activator/template/modern-web-template) the original activator template
 
 Getting Started
 ----------
@@ -36,7 +36,7 @@ Your development environment will require:
 Once the prerequisites have been installed, you will be able to execute the following from a terminal.
 
 ```
-../modern-web-template >  sbt run
+../modern-web-template >  ./activator run
 ```
 
 This should fetch all the dependencies and start a Web Server listening on *localhost:9000*
