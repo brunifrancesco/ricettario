@@ -8,3 +8,17 @@ body {
 footer {
     text-align: center;
 }
+
+.float-right{
+	float: right;
+	margin-left: 10px;
+}
+
+.panel-heading {
+    overflow: hidden;
+    padding-top: 20px;
+}
+.btn-group {
+    position: relative;
+    top: -5px;
+}
